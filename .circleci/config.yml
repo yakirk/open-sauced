@@ -1,12 +1,15 @@
-version: 2.1
+version: '2.1'
 orbs:
-  windows: circleci/windows@2.4.0
+  win: circleci/windows@2.4
 jobs:
-  build-windows:
-    machine:
-      image: windows-server-2019-nvidia:stable
-      resource_class: windows.medium
-      shell: powershell.exe -ExecutionPolicy Bypass
+  build:
+    executor:
+      name: win/default
+      size: medium
     steps:
       - checkout
-      - run: systeminfo
+      - run: 'Write-Host ''Hello, Windows'''
+workflows:
+  my-workflow:
+    jobs:
+      - build
